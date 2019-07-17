@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+
+  <%# 部分テンプレート %>
+
+  <%= render"users/list", user: @user, book_new: @book_new %>
+
+  <div class="col-xs-9 float-left">
+    <h2>Book details</h2>
+    <table class="table table-hover table-inverse">
+      <tbody>
+        <tr>
+          <td>
+          <%= form_for(@user) do |f| %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 10, 10, class: "pull-left profile-thumb", fallback: "no_image.jpg"%>
+          <% end %>
+          </td>
+          <th><%= @user.name %></th>
+          <td><%= @book.title %></td>
+          <td><%= @book.body %></td>
+          <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-success btn-block w-auto mt-2" %></td>
+          <td><%= link_to "Destroy", book_path(@book), class: "btn btn-danger btn-block w-auto mt-2", method: :delete %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

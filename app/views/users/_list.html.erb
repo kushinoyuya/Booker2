@@ -1,0 +1,36 @@
+<div class="col-xs-3">
+  <h1>User Info</h1>
+  <!-- プロフィール -->
+  <%= form_for(@user) do |f| %>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "pull-left profile-thumb", fallback: "no_image.jpg"%>
+  <% end %>
+  <table class="table">
+    <tbody>
+      <tr></tr>
+      <tr>
+        <th>name</th>
+        <th><%= @user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= @user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+  <%= link_to edit_user_path(@user) do %>
+  <button type="button" class="col-xs-12 btn btn-default"><i class="glyphicon glyphicon-wrench"></i></button>
+  <% end %>
+  </div>
+  
+  <!-- NEWBOOK -->
+  <h2>New book</h2>
+  <!-- form_for部分 -->
+  <%= form_for(@book) do |f| %>
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+    <h4>Opinion</h4>
+    <%= f.text_area :body %>
+    <%= f.submit("Create Book",class: 'btn btn-primary') %>
+  <% end %>
+</div>
