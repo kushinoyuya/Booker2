@@ -1,26 +1,61 @@
 <div class="container">
   <div class="row">
-
   <%# 部分テンプレート %>
-
-  <%= render"users/list", user: @user, book_new: @book_new %>
-
-  <div class="col-xs-9 float-left">
+  <%= render"users/list", user: @user, book: @book_new %>
+  <div class="col-xs-9">
     <h2>Book details</h2>
+
+    <!-- 条件分岐 -->
+    <% if @user.id == current_user.id %>
     <table class="table table-hover table-inverse">
       <tbody>
         <tr>
           <td>
           <%= form_for(@user) do |f| %>
-          <%= attachment_image_tag @user, :profile_image, :fill, 10, 10, class: "pull-left profile-thumb", fallback: "no_image.jpg"%>
+          <%= attachment_image_tag @user, :profile_image, :fill, 20, 20, class: "pull-left profile-thumb", fallback: "no_image.jpg", size:"20x20" %>
           <% end %>
           </td>
-          <th><%= @user.name %></th>
-          <td><%= @book.title %></td>
+          <td>
+            <%= link_to user_path(@user) do %>
+            <%= @user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to book_path(@book) do %>
+            <%= @book.title %>
+            <% end %>
+          </td>
           <td><%= @book.body %></td>
           <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-success btn-block w-auto mt-2" %></td>
           <td><%= link_to "Destroy", book_path(@book), class: "btn btn-danger btn-block w-auto mt-2", method: :delete %></td>
         </tr>
       </tbody>
     </table>
+  <% else %>
+
+  <table class="table table-hover table-inverse">
+    <tbody>
+      <tr>
+        <td>
+        <%= form_for(@user) do |f| %>
+        <%= attachment_image_tag @user, :profile_image, :fill, 20, 20, class: "pull-left profile-thumb", fallback: "no_image.jpg", size:"20x20" %>
+        <% end %>
+        </td>
+        <td>
+          <%= link_to user_path(@user) do %>
+          <%= @user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to book_path(@book) do %>
+          <%= @book.title %>
+          <% end %>
+        </td>
+        <td><%= @book.body %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% end %>
+
   </div>

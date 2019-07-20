@@ -1,32 +1,48 @@
+<!-- Bookのエラーメッセージ -->
+<% if @book.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <h2>errors</h2>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
 <div class="col-xs-3">
   <h1>User Info</h1>
   <!-- プロフィール -->
-  <%= form_for(@user) do |f| %>
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "pull-left profile-thumb", fallback: "no_image.jpg"%>
+  <%= form_for(user) do |f| %>
+
+  <%= attachment_image_tag user, :profile_image, :fill, 60, 60, class: "pull-left profile-thumb", fallback: "no_image.jpg"%>
   <% end %>
   <table class="table">
     <tbody>
       <tr></tr>
       <tr>
         <th>name</th>
-        <th><%= @user.name %></th>
+        <th><%= user.name %></th>
       </tr>
       <tr>
         <th>introduction</th>
-        <th><%= @user.introduction %></th>
+        <th><%= user.introduction %></th>
       </tr>
     </tbody>
   </table>
   <div class="row">
-  <%= link_to edit_user_path(@user) do %>
-  <button type="button" class="col-xs-12 btn btn-default"><i class="glyphicon glyphicon-wrench"></i></button>
-  <% end %>
+  <!-- 条件分岐 -->
+    <%= link_to edit_user_path(@user) do %>
+    <button type="button" class="col-xs-12 btn btn-default"><i class="glyphicon glyphicon-wrench"></i></button>
+    <% end %>
+  <!-- 条件分岐 -->
   </div>
-  
+
   <!-- NEWBOOK -->
   <h2>New book</h2>
   <!-- form_for部分 -->
-  <%= form_for(@book) do |f| %>
+  <%= form_for(book) do |f| %>
     <h4>Title</h4>
     <%= f.text_field :title %>
     <h4>Opinion</h4>
